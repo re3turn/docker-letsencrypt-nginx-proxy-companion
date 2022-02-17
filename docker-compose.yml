@@ -2,14 +2,14 @@ version: '3.7'
 
 services:
   nginx-proxy:
-    image: jwilder/nginx-proxy 
+    image: jwilder/nginx-proxy:alpine
     container_name: nginx-proxy
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - vhost:/etc/nginx/vhost.d
+      - ./dev-proxy:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:ro
     restart: always
@@ -21,7 +21,7 @@ services:
     container_name: letsencrypt-nginx
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - vhost:/etc/nginx/vhost.d
+      - ./dev-proxy:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:rw
     restart: always
@@ -34,7 +34,6 @@ services:
 
 volumes:
   conf:
-  vhost:
   html:
   certs:
 
