@@ -12,6 +12,10 @@ services:
       - ./dev-proxy:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:ro
+    logging:
+      options:
+        max-file: '3'
+        max-size: 10m
     restart: always
     networks:
       - proxy-network
@@ -24,6 +28,10 @@ services:
       - ./dev-proxy:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:rw
+    logging:
+      options:
+        max-file: '3'
+        max-size: 10m
     restart: always
     networks:
       - proxy-network
